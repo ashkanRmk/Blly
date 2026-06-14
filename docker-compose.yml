@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: bill-dong:latest
+    container_name: bill-dong
+    ports:
+      - "8080:80"
+    restart: unless-stopped

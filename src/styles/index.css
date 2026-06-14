@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+
+/* ----------------------------------------------------------------------------
+   Dark-luxury theme tokens (Tailwind v4 @theme → generates color utilities)
+---------------------------------------------------------------------------- */
+@theme {
+  --font-sans: 'Vazirmatn', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+
+  --color-base: #0b0b0f;
+  --color-base-2: #15131c;
+
+  --color-cream: #f5f3ee;
+  --color-muted: #a39c91;
+  --color-faint: #6f6a62;
+
+  --color-gold: #d4af37;
+  --color-gold-soft: #e6c868;
+  --color-gold-deep: #a9852a;
+
+  --color-danger: #e5677a;
+  --color-success: #4fd1a0;
+  --color-info: #7aa2f7;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    background-color: var(--color-base);
+    background-image:
+      radial-gradient(
+        60rem 60rem at 85% -10%,
+        rgba(212, 175, 55, 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        50rem 50rem at -10% 10%,
+        rgba(122, 162, 247, 0.08),
+        transparent 55%
+      ),
+      linear-gradient(160deg, #0b0b0f 0%, #15131c 60%, #100e16 100%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(212, 175, 55, 0.3);
+    color: #fff;
+  }
+
+  /* Subtle gold scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.25);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.45);
+    background-clip: padding-box;
+  }
+
+  input,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+
+  /* Hide number-input spinners — we use formatted text inputs */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Reusable component classes
+---------------------------------------------------------------------------- */
+@layer components {
+  .glass {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02)
+    );
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.05) inset,
+      0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.09),
+      rgba(255, 255, 255, 0.03)
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(120deg, #f6e6a8 0%, #d4af37 45%, #a9852a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gold-ring {
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.55), 0 8px 30px -8px rgba(212, 175, 55, 0.35);
+  }
+
+  /* Fade/slide-in used across cards */
+  .animate-rise {
+    animation: rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
