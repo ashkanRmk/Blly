@@ -50,5 +50,3 @@ src/
   store/       invoiceStore · settingsStore · toastStore · selectors
   utils/       calculations · money · paymentLinks · persianNumbers · finalSummaryText · card · image
 ```
-
-No tests, no auth, no server — a clean, extensible frontend MVP. A full Persian README is in [README.md](./README.md).
